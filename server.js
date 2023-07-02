@@ -10,7 +10,7 @@ try{
    });
    console.log("Successfully connected to Oracle!")
    const result = await connection.execute(`
-   select * from players
+   select * from causes
  `);
  for (const row of result.rows) {
     console.log(row);
