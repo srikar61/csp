@@ -31,12 +31,23 @@ import { CausesService } from '../causes.service';
 })
 export class CausesComponent implements OnInit {
   tableData: any[] = [];
-  displayedColumns: string[] = ['sno', 'disease', 'cause'];
+  displayedColumns: string[] = ['sno', 'disease', 'cause','edit'];
 
   constructor(private causesService: CausesService) {}
 
   ngOnInit(): void {
     this.getCausesData();
+  }
+  t1: any;
+
+  show() {
+    this.t1 = document.querySelector(".t1");
+    const t1DisplayStyle = window.getComputedStyle(this.t1).getPropertyValue('display');
+    if (t1DisplayStyle === "none") {
+      this.t1.style.display = "block";
+    } else {
+      this.t1.style.display = "none";
+    }
   }
 
   getCausesData(): void {
@@ -48,5 +59,9 @@ export class CausesComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+  editRow(element: any) {
+    // Handle edit operation for the selected row
+    console.log('Edit row:', element);
   }
 }
