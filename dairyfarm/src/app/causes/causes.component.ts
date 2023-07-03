@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CausesService } from '../causes.service';
-
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-causes',
   templateUrl: './causes.component.html',
@@ -33,6 +33,7 @@ export class CausesComponent implements OnInit {
     this.causesService.getCausesData().subscribe(
       (data) => {
         this.tableData = data;
+        console.log(this.tableData);
       },
       (error) => {
         console.error(error);
@@ -44,7 +45,7 @@ export class CausesComponent implements OnInit {
     this.causesService.insertCause(cause).subscribe(
       (response) => {
         // Handle the successful insert
-        console.log(response);
+        console.log((response),this.tableData);
         this.getCausesData(); // Refresh the data after insertion
         this.resetForm();
       },
@@ -73,7 +74,7 @@ export class CausesComponent implements OnInit {
     this.causesService.deleteCause(id).subscribe(
       (response) => {
         // Handle the successful deletion
-        console.log(response);
+        console.log((response),this.tableData);
         this.getCausesData(); 
         console.log(this.tableData);// Refresh the data after deletion
       },

@@ -50,6 +50,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+
 import { HomeComponent } from './home/home.component';
 import { CausesComponent } from './causes/causes.component';
 @NgModule({
@@ -100,7 +101,8 @@ import { CausesComponent } from './causes/causes.component';
     MatSortModule,
     MatTableModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+  
   ],
   exports: [
     MatAutocompleteModule,

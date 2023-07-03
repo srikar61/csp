@@ -49,11 +49,12 @@ app.post('/api/causes', async (req, res) => {
 
     // Close the database connection
     await connection.close();
-    res.status(200).send('Data inserted successfully');
+    // res.status(200).send('Data inserted successfully');
+    res.status(200).json({message: 'Data inserted successfully'});
 
   } catch (error) {
     console.error('Error executing SQL statement:', error);
-    res.status(500).send('Failed to insert data into the database');
+    res.status(500).json('Failed to insert data into the database');
   }
 });
 
@@ -74,11 +75,11 @@ app.put('/api/causes/:id', async (req, res) => {
     await connection.commit();
     // Close the database connection
     await connection.close();
-    res.status(200).send('Data updated successfully');
+    res.status(200).json('Data updated successfully');
 
   } catch (error) {
     console.error('Error executing SQL statement:', error);
-    res.status(500).send('Failed to update data in the database');
+    res.status(500).json('Failed to update data in the database');
   }
 });
 
@@ -95,11 +96,11 @@ app.delete('/api/causes/:id', async (req, res) => {
     await connection.commit();
     // Close the database connection
     await connection.close();
-    res.status(200).send('Data deleted successfully');
+    res.status(200).json('Data deleted successfully');
 
   } catch (error) {
     console.error('Error executing SQL statement:', error);
-    res.status(500).send('Failed to delete data from the database');
+    res.status(500).json('Failed to delete data from the database');
   }
 });
 
