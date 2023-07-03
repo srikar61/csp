@@ -13,4 +13,19 @@ export class CausesService {
   getCausesData(): Observable<any> {
     return this.http.get<any>(this.apiUrl);
   }
+
+  insertCause(cause: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, cause);
+    
+  }
+
+  updateCause(cause: any): Observable<any> {
+    const url = `${this.apiUrl}/${cause.sno}`;
+    return this.http.put<any>(url, cause);
+  }
+
+  deleteCause(id: number): Observable<any> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.delete<any>(url);
+  }
 }

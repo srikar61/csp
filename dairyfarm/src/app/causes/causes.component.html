@@ -1,16 +1,3 @@
-<!-- <body><div class="d1"><table mat-table [dataSource]="tableData" class="mat-elevation-z8">
-  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-    <th mat-header-cell *matHeaderCellDef>{{ column | uppercase }}</th>
-    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-</div>
-
-
-</body> -->
 <body>
   <div class="d1">
     <table mat-table [dataSource]="tableData" class="mat-elevation-z8">
@@ -26,37 +13,36 @@
         <th mat-header-cell *matHeaderCellDef>Cause</th>
         <td mat-cell *matCellDef="let element">{{ element[2] }}</td>
       </ng-container>
-    <!-- ... -->
-<ng-container matColumnDef="edit">
-  <th mat-header-cell *matHeaderCellDef>Edit</th>
-  <td mat-cell *matCellDef="let element">
-    <button mat-icon-button color="primary" (click)="editRow(element)">
-      <mat-icon>edit</mat-icon>
-    </button>
-  </td>
-</ng-container>
-<!-- ... -->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef>Edit</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="primary" (click)="updateData(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="deleteData(element[0])">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
 
-      
-      <tr mat-header-row *matHeaderRowDef="['sno', 'disease', 'cause','edit']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['sno', 'disease', 'cause','edit']"></tr>
+      <tr mat-header-row *matHeaderRowDef="['sno', 'disease', 'cause', 'edit']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['sno', 'disease', 'cause', 'edit']"></tr>
     </table>
     <button mat-raised-button color="primary" style="float: right;" (click)="show()">Add data</button>
   </div>
 
-<div class="d1"><div class="t1">
-<table ><caption><h2>Add data</h2></caption>
-  
-  <tr>
-    <td><input type="text" name="sno" placeholder="enter sno"></td>
-    <td><input type="text" name="disease" placeholder="enter disease"></td>
-    <td><input type="text" name="cause" placeholder="enter cause"></td>
-    <button mat-raised-button color="accent" style="float: right;align-self: center;">submit</button>
-  </tr>
+  <div class="d1">
+    <div class="t1">
+      <table>
+        <caption><h2>Add data</h2></caption>
 
-</table>
-  
-</div>
-</div>
+        <tr>
+          <td><input type="text" name="sno" placeholder="enter sno" [(ngModel)]="newCause.sno"></td>
+          <td><input type="text" name="disease" placeholder="enter disease" [(ngModel)]="newCause.disease"></td>
+          <td><input type="text" name="cause" placeholder="enter cause" [(ngModel)]="newCause.cause"></td>
+          <button mat-raised-button color="accent" style="float: right;align-self: center;" (click)="insertData(newCause)">submit</button>
+        </tr>
+      </table>
+    </div>
+  </div>
 </body>
-
