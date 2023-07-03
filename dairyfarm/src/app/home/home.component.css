@@ -1,0 +1,32 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+}
+.container{
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    
+}
+.text{
+    font-size: 5em;
+    letter-spacing:10px;
+    font-family:monospace;
+    color:white;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 5rem;
+    overflow: hidden;
+    animation:
+        typing 2s ,
+        cursor .4s step-end infinite alternate;
+    
+}
+@keyframes cursor{
+    50%{border-color:transparent}
+}
+@keyframes typing{
+    from {width: 0}
+}

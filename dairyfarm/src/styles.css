@@ -2,3 +2,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+body {
+    
+    background: url('https://www.animalactivistwatch.com/wp-content/uploads/2020/02/Dairy-Farm.jpg') fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+  
+  }

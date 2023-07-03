@@ -86,6 +86,6 @@ export class CausesComponent implements OnInit {
 
   resetForm() {
     this.newCause = {};
-    window.location.reload();
+    this.t1.style.display = 'none';
   }
 }
