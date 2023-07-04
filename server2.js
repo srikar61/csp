@@ -1,3 +1,4 @@
+
 const express = require('express');
 const oracledb = require('oracledb');
 const cors = require('cors');
@@ -32,6 +33,25 @@ app.get('/api/causes', async (req, res) => {
   }
 });
 
+// Define the route to fetch data from the "diseases" table
+app.get('/api/diseases', async (req, res) => {
+  try {
+    // Create a connection to the Oracle database
+    const connection = await oracledb.getConnection(dbConfig);
+
+    // Execute the SQL query to fetch data from the "diseases" table
+    const result = await connection.execute('SELECT * FROM diseases');
+
+    // Close the database connection
+    await connection.close();
+    res.json(result.rows);
+
+  } catch (error) {
+    console.error('Error executing SQL statement:', error);
+    res.status(500).send('Failed to fetch data from the database');
+  }
+});
+
 // Define the route to insert data into the "causes" table
 app.post('/api/causes', async (req, res) => {
   try {
@@ -49,7 +69,31 @@ app.post('/api/causes', async (req, res) => {
 
     // Close the database connection
     await connection.close();
-    // res.status(200).send('Data inserted successfully');
+    res.status(200).json({message: 'Data inserted successfully'});
+
+  } catch (error) {
+    console.error('Error executing SQL statement:', error);
+    res.status(500).json('Failed to insert data into the database');
+  }
+});
+
+// Define the route to insert data into the "diseases" table
+app.post('/api/diseases', async (req, res) => {
+  try {
+    const disease = req.body;
+
+    // Create a connection to the Oracle database
+    const connection = await oracledb.getConnection(dbConfig);
+
+    // Execute the SQL query to insert data into the "diseases" table
+    await connection.execute(
+      `INSERT INTO diseases (sno, disease, symptoms) VALUES (:sno, :disease, :symptoms)`,
+      disease
+    );
+    await connection.commit();
+
+    // Close the database connection
+    await connection.close();
     res.status(200).json({message: 'Data inserted successfully'});
 
   } catch (error) {
@@ -83,6 +127,31 @@ app.put('/api/causes/:id', async (req, res) => {
   }
 });
 
+// Define the route to update data in the "diseases" table
+app.put('/api/diseases/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const disease = req.body;
+
+    // Create a connection to the Oracle database
+    const connection = await oracledb.getConnection(dbConfig);
+
+    // Execute the SQL query to update data in the "diseases" table
+    await connection.execute(
+      `UPDATE diseases SET sno = :sno, disease = :disease ,symptoms= :symptoms WHERE sno = :id`,
+      { ...disease, id }
+    );
+    await connection.commit();
+    // Close the database connection
+    await connection.close();
+    res.status(200).json('Data updated successfully');
+
+  } catch (error) {
+    console.error('Error executing SQL statement:', error);
+    res.status(500).json('Failed to update data in the database');
+  }
+});
+
 // Define the route to delete data from the "causes" table
 app.delete('/api/causes/:id', async (req, res) => {
   try {
@@ -93,6 +162,27 @@ app.delete('/api/causes/:id', async (req, res) => {
 
     // Execute the SQL query to delete data from the "causes" table
     await connection.execute(`DELETE FROM causes WHERE sno = :id`, [id]);
+    await connection.commit();
+    // Close the database connection
+    await connection.close();
+    res.status(200).json('Data deleted successfully');
+
+  } catch (error) {
+    console.error('Error executing SQL statement:', error);
+    res.status(500).json('Failed to delete data from the database');
+  }
+});
+
+// Define the route to delete data from the "diseases" table
+app.delete('/api/diseases/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    // Create a connection to the Oracle database
+    const connection = await oracledb.getConnection(dbConfig);
+
+    // Execute the SQL query to delete data from the "diseases" table
+    await connection.execute(`DELETE FROM diseases WHERE sno = :id`, [id]);
     await connection.commit();
     // Close the database connection
     await connection.close();

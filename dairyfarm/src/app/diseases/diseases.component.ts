@@ -1,23 +1,24 @@
+// diseases.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CausesService } from '../causes.service';
+import { DiseasesService } from '../diseases.service';
 import { Observable } from 'rxjs';
-@Component({
-  selector: 'app-causes',
-  templateUrl: './causes.component.html',
-  styleUrls: ['./causes.component.css'],
-})
-export class CausesComponent implements OnInit {
-  tableData: any[] = [];
-  displayedColumns: string[] = ['sno', 'disease', 'cause', 'edit'];
-  newCause: any = {};
 
-  constructor(private causesService: CausesService) {}
+@Component({
+  selector: 'app-diseases',
+  templateUrl: './diseases.component.html',
+  styleUrls: ['./diseases.component.css'],
+})
+export class DiseasesComponent implements OnInit {
+  tableData: any[] = [];
+  newDisease: any = {};
+  displayedColumns: string[] = ['sno', 'disease', 'symptoms', 'edit'];
+  t1: any;
+
+  constructor(private diseasesService: DiseasesService) {}
 
   ngOnInit(): void {
-    this.getCausesData();
+    this.getDiseasesData();
   }
-
-  t1: any;
 
   show() {
     this.t1 = document.querySelector('.t1');
@@ -29,8 +30,8 @@ export class CausesComponent implements OnInit {
     }
   }
 
-  getCausesData(): void {
-    this.causesService.getCausesData().subscribe(
+  getDiseasesData(): void {
+    this.diseasesService.getDiseasesData().subscribe(
       (data) => {
         this.tableData = data;
         
@@ -41,12 +42,12 @@ export class CausesComponent implements OnInit {
     );
   }
 
-  insertData(cause: any) {
-    this.causesService.insertCause(cause).subscribe(
+  insertData(newDisease: any) {
+    this.diseasesService.insertDisease(newDisease).subscribe(
       (response) => {
         // Handle the successful insert
-        console.log((response));
-        this.getCausesData(); // Refresh the data after insertion
+        console.log(response);
+        this.getDiseasesData(); // Refresh the data after insertion
         this.resetForm();
       },
       (error) => {
@@ -56,12 +57,12 @@ export class CausesComponent implements OnInit {
     );
   }
 
-  updateData(cause: any) {
-    this.causesService.updateCause(cause).subscribe(
+  updateData(disease: any) {
+    this.diseasesService.updateDisease(disease).subscribe(
       (response) => {
         // Handle the successful update
         console.log(response);
-        this.getCausesData(); // Refresh the data after update
+        this.getDiseasesData(); // Refresh the data after update
       },
       (error) => {
         // Handle the error
@@ -71,12 +72,12 @@ export class CausesComponent implements OnInit {
   }
 
   deleteData(id: number) {
-    this.causesService.deleteCause(id).subscribe(
+    this.diseasesService.deleteDisease(id).subscribe(
       (response) => {
         // Handle the successful deletion
-        console.log((response));
-        this.getCausesData(); 
-        // console.log(this.tableData);// Refresh the data after deletion
+        console.log(response);
+        this.getDiseasesData();
+        // console.log(this.tableData); // Refresh the data after deletion
       },
       (error) => {
         // Handle the error
@@ -86,7 +87,6 @@ export class CausesComponent implements OnInit {
   }
 
   resetForm() {
-    this.newCause = {};
-    this.t1.style.display = 'none';
+    this.newDisease = {};
   }
 }

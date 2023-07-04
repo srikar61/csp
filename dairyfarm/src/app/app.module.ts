@@ -53,11 +53,15 @@ import { MatTableModule } from '@angular/material/table';
 
 import { HomeComponent } from './home/home.component';
 import { CausesComponent } from './causes/causes.component';
+import { DiseasesComponent } from './diseases/diseases.component';
+import { AboutComponent } from './about/about.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CausesComponent
+    CausesComponent,
+    DiseasesComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
