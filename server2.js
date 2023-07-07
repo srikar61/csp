@@ -194,6 +194,49 @@ app.delete('/api/diseases/:id', async (req, res) => {
   }
 });
 
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const connection = await oracledb.getConnection(dbConfig);
+    const result = await connection.execute(
+      `SELECT * FROM users WHERE username = :username AND password = :password`,
+      [username, password]
+    );
+
+    if (result.rows.length > 0) {
+      res.json({ success: true, message: 'Login successful' });
+    } else {
+      res.json({ success: false, message: 'Invalid credentials' });
+    }
+    await connection.commit();
+    await connection.close();
+  } catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ success: false, message: 'An error occurred' });
+  }
+});
+
+// Route for signup
+app.post('/signup', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const connection = await oracledb.getConnection(dbConfig);
+    await connection.execute(
+      `INSERT INTO users (username, password) VALUES (:username, :password)`,
+      [username, password]
+    );
+    
+    res.json({ success: true, message: 'Signup successful' });
+    await connection.commit();
+    await connection.close();
+  } catch (error) {
+    console.error('Error during signup:', error);
+    res.status(500).json({ success: false, message: 'An error occurred' });
+  }
+});
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

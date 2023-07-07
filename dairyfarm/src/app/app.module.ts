@@ -55,13 +55,25 @@ import { HomeComponent } from './home/home.component';
 import { CausesComponent } from './causes/causes.component';
 import { DiseasesComponent } from './diseases/diseases.component';
 import { AboutComponent } from './about/about.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { Home2Component } from './home2/home2.component';
+import { NecComponent } from './nec/nec.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CausesComponent,
     DiseasesComponent,
-    AboutComponent
+    AboutComponent,
+    LoginComponent,
+    SignupComponent,
+    DashboardComponent,
+    Home2Component,
+    NecComponent,
+    AboutusComponent
   ],
   imports: [
     BrowserModule,
