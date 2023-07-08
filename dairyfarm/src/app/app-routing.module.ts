@@ -13,7 +13,7 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 
 const routes: Routes = [
   {
-    path:'',redirectTo:'dashboard/nec',pathMatch:'full'
+    path:'',redirectTo:'dashboard',pathMatch:'full'
   },
   {
     path:'home2',component:Home2Component,
@@ -41,6 +41,9 @@ const routes: Routes = [
     component:DashboardComponent,
     children:[
       {
+        path:'',
+        component:NecComponent
+      },{
         path:'login',
         component:LoginComponent
       },
