@@ -16,7 +16,6 @@ export class CausesService {
 
   insertCause(cause: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, cause);
-    
   }
 
   updateCause(cause: any): Observable<any> {

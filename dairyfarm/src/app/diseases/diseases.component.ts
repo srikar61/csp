@@ -1,7 +1,11 @@
-// diseases.component.ts
 import { Component, OnInit } from '@angular/core';
 import { DiseasesService } from '../diseases.service';
-import { Observable } from 'rxjs';
+
+interface Disease {
+  sno: number;
+  disease: string;
+  symptoms: string;
+}
 
 @Component({
   selector: 'app-diseases',
@@ -9,10 +13,15 @@ import { Observable } from 'rxjs';
   styleUrls: ['./diseases.component.css'],
 })
 export class DiseasesComponent implements OnInit {
-  tableData: any[] = [];
-  newDisease: any = {};
+  tableData: Disease[] = [];
   displayedColumns: string[] = ['sno', 'disease', 'symptoms', 'edit'];
-  t1: any;
+  showForm: boolean = false;
+  editMode: boolean = false;
+  formData: Disease = {
+    sno: 0,
+    disease: '',
+    symptoms: '',
+  };
 
   constructor(private diseasesService: DiseasesService) {}
 
@@ -20,21 +29,10 @@ export class DiseasesComponent implements OnInit {
     this.getDiseasesData();
   }
 
-  show() {
-    this.t1 = document.querySelector('.t1');
-    const t1DisplayStyle = window.getComputedStyle(this.t1).getPropertyValue('display');
-    if (t1DisplayStyle === 'none') {
-      this.t1.style.display = 'block';
-    } else {
-      this.t1.style.display = 'none';
-    }
-  }
-
   getDiseasesData(): void {
     this.diseasesService.getDiseasesData().subscribe(
       (data) => {
         this.tableData = data;
-        
       },
       (error) => {
         console.error(error);
@@ -42,51 +40,60 @@ export class DiseasesComponent implements OnInit {
     );
   }
 
-  insertData(newDisease: any) {
-    this.diseasesService.insertDisease(newDisease).subscribe(
+  insertData(): void {
+    this.diseasesService.insertDisease(this.formData).subscribe(
       (response) => {
-        // Handle the successful insert
         console.log(response);
-        this.getDiseasesData(); // Refresh the data after insertion
+        this.getDiseasesData();
         this.resetForm();
       },
       (error) => {
-        // Handle the error
         console.error(error);
       }
     );
   }
 
-  updateData(disease: any) {
-    this.diseasesService.updateDisease(disease).subscribe(
+  updateData(): void {
+    this.diseasesService.updateDisease(this.formData).subscribe(
       (response) => {
-        // Handle the successful update
-        console.log(response);
-        this.getDiseasesData(); // Refresh the data after update
-      },
-      (error) => {
-        // Handle the error
-        console.error(error);
-      }
-    );
-  }
-
-  deleteData(id: number) {
-    this.diseasesService.deleteDisease(id).subscribe(
-      (response) => {
-        // Handle the successful deletion
         console.log(response);
         this.getDiseasesData();
-        // console.log(this.tableData); // Refresh the data after deletion
+        this.resetForm();
       },
       (error) => {
-        // Handle the error
         console.error(error);
       }
     );
   }
 
-  resetForm() {
-    this.newDisease = {};
+  deleteData(sno: number): void {
+    this.diseasesService.deleteDisease(sno).subscribe(
+      (response) => {
+        console.log(response);
+        this.getDiseasesData();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  cancelForm(): void {
+    this.showForm = false;
+    this.resetForm();
+  }
+
+  resetForm(): void {
+    this.formData = {
+  sno: 0,
+  disease: '',
+  symptoms: '',
+};
+  }
+
+  editData(data: Disease): void {
+    this.showForm = true;
+    this.editMode = true;
+    this.formData = { ...data };
   }
 }

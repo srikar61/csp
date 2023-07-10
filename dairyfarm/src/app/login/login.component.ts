@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     auth2.signIn().then((googleUser: any) => {
       const id_token = googleUser.getAuthResponse().id_token;
       // Send the id_token to your server for verification and further processing
-
+    
       // Example: sending the id_token to the server using HttpClient
       this.http.post('http://localhost:3000/google-login', { id_token })
         .subscribe((response: any) => {
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
         });
     }).catch((error: any) => {
       console.log(error);
-      alert("Google sign-in error");
+      
     });
   }
 

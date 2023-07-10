@@ -25,7 +25,12 @@ app.get('/api/causes', async (req, res) => {
 
     // Close the database connection
     await connection.close();
-    res.json(result.rows);
+    const records = result.rows.map(row => ({
+      sno: row[0],
+      disease: row[1],
+      cause: row[2]
+    }));
+    res.json(records);
 
   } catch (error) {
     console.error('Error executing SQL statement:', error);
@@ -44,7 +49,12 @@ app.get('/api/diseases', async (req, res) => {
 
     // Close the database connection
     await connection.close();
-    res.json(result.rows);
+    const records = result.rows.map(row => ({
+      sno: row[0],
+      disease: row[1],
+      symptoms: row[2]
+    }));
+    res.json(records);
 
   } catch (error) {
     console.error('Error executing SQL statement:', error);
