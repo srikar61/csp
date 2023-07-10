@@ -52,3 +52,6 @@
   background-color: #ccc;
   cursor: not-allowed;
 }
+#google-signin-button{
+  background-color: rgb(8, 132, 132);
+}

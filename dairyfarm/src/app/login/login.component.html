@@ -9,7 +9,8 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" [(ngModel)]="password" required>
       </div>
-      <button type="submit" [disabled]="!username || !password">Login</button>
+      <button type="submit" [disabled]="!username || !password" style="width:100%">Login</button>
+      <button id="google-signin-button" (click)="onSignIn()" style="width:100%">Sign in with Google</button>
     </form>
   </div>
   
