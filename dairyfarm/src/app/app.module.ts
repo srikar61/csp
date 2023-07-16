@@ -61,6 +61,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { Home2Component } from './home2/home2.component';
 import { NecComponent } from './nec/nec.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { OopsComponent } from './oops/oops.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +74,8 @@ import { AboutusComponent } from './aboutus/aboutus.component';
     DashboardComponent,
     Home2Component,
     NecComponent,
-    AboutusComponent
+    AboutusComponent,
+    OopsComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,8 @@ import { Home2Component } from './home2/home2.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NecComponent } from './nec/nec.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
+import { AuthGuard } from './auth.guard';
+import { OopsComponent } from './oops/oops.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,7 @@ const routes: Routes = [
   },
   {
     path:'home2',component:Home2Component,
+    canActivate: [AuthGuard],
     children: [
       {
         path:'',
@@ -39,6 +42,7 @@ const routes: Routes = [
 {
     path:'dashboard',
     component:DashboardComponent,
+     
     children:[
       {
         path:'',
@@ -55,6 +59,10 @@ const routes: Routes = [
         component:NecComponent
       }
     ]
+  },
+  {
+    path: '**',
+    component:OopsComponent
   }
 ];
 

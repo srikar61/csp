@@ -22,6 +22,7 @@ export class CausesComponent implements OnInit {
     disease: '',
     cause: '',
   };
+  editedRowIndex: number | null = null;
 
   constructor(private causesService: CausesService) {}
 
@@ -31,7 +32,7 @@ export class CausesComponent implements OnInit {
 
   getCausesData(): void {
     this.causesService.getCausesData().subscribe(
-      (data) => {
+      (data: Cause[]) => {
         this.tableData = data;
       },
       (error) => {
@@ -46,6 +47,7 @@ export class CausesComponent implements OnInit {
         console.log(response);
         this.getCausesData();
         this.resetForm();
+        this.toggleForm();
       },
       (error) => {
         console.error(error);
@@ -54,16 +56,20 @@ export class CausesComponent implements OnInit {
   }
 
   updateData(): void {
-    this.causesService.updateCause(this.formData).subscribe(
-      (response) => {
-        console.log(response);
-        this.getCausesData();
-        this.resetForm();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    if (this.editMode && this.editedRowIndex !== null && this.editedRowIndex >= 0) {
+      const updatedData = this.tableData[this.editedRowIndex];
+      this.causesService.updateCause(updatedData).subscribe(
+        (response) => {
+          console.log(response);
+          this.getCausesData();
+          this.resetForm();
+          this.editedRowIndex = null;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
   }
 
   deleteData(sno: number): void {
@@ -83,17 +89,22 @@ export class CausesComponent implements OnInit {
     this.editMode = false;
     this.resetForm();
   }
-  
 
-  editData(data: Cause): void {
-    this.showForm = true;
+  editData(data: Cause, index: number): void {
+    if (this.editMode && this.editedRowIndex !== null) {
+      this.updateData();
+    }
+    this.showForm = false;
     this.editMode = true;
     this.formData = { ...data };
+    this.editedRowIndex = index;
   }
 
   cancelForm(): void {
-    this.showForm = false;
-    this.resetForm();
+    if (this.editMode && this.editedRowIndex !== null) {
+      this.editedRowIndex = null;
+      this.resetForm();
+    }
   }
 
   resetForm(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../auth.service';
 declare const gapi: any;
 
 @Component({
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   username: any;
   password: any;
 
-  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone) { }
+  constructor(private http: HttpClient, private router: Router, private ngZone: NgZone,public authservice:AuthService) { }
 
   ngOnInit() {
     this.loadGoogleSignInApi();
@@ -36,16 +36,12 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.http.post('http://localhost:3000/login', { username: this.username, password: this.password })
-      .subscribe((response: any) => {
-        console.log(response);
-        // Handle the login response
-        if (response.success) {
-          this.redirectToHome();
-        } else {
-          alert("Invalid credentials");
-        }
-      });
+    const loggedIn = this.authservice.login(this.username, this.password);
+    if (loggedIn) {
+      this.redirectToHome();
+    } else {
+      alert("Invalid credentials");
+    }
   }
 
   onSignIn() {
