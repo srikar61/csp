@@ -244,7 +244,7 @@ app.post('/signup', async (req, res) => {
     await connection.close();
   } catch (error) {
     console.error('Error during signup:', error);
-    res.status(500).json({ success: false, message: 'An error occurred' });
+    res.json({ success: false, message: 'An error occurred' });
   }
 });
 app.listen(port, () => {

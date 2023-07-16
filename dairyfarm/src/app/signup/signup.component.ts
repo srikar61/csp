@@ -8,23 +8,27 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  username: any;
-  email: any;
-  password: any;
+  username: string = '';
+  email: string = '';
+  password: string = '';
 
   constructor(private http: HttpClient, private router: Router) { }
 
-
   signup() {
-    this.http.post('http://localhost:3000/signup', { username: this.username, email: this.email, password: this.password })
-      .subscribe((response: any) => {
-        console.log(response);
-        // Handle the signup response
-        if (response.success) {
-          this.router.navigate(['dashboard/login']);
-        } else {
-          // Handle signup failure
-        }
-      });
+    // Perform signup logic
+    if (this.username && this.email && this.password) {
+      this.http.post('http://localhost:3000/signup', { username: this.username, email: this.email, password: this.password })
+        .subscribe((response: any) => {
+          console.log(response);
+          // Handle the signup response
+          if (response.success) {
+            this.router.navigate(['dashboard/login']);
+          } else {
+            alert('Username already exists');
+          }
+        }, (error) => {
+          console.error(error);
+        });
+    }
   }
 }
