@@ -70,7 +70,7 @@ This is an Angular application developed for managing a dairy farm. The applicat
 ![Login Page](https://github.com/user-attachments/assets/160a198a-eb96-43a5-ae87-727a3c8f6ea0)
 
 ### Signup Page
-![Signup Page](https://github.com/user-attachments/assets/150b82d1-9d3b-4011-84c5-9d549183f80d)
+![Signup Page](https://github.com/user-attachments/assets/02f11bb1-1135-4c1e-90be-e4366e131126)
 
 ### User Dashboard
 ![User Dashboard](https://github.com/user-attachments/assets/78e00458-6e69-4038-a28e-a8d715654b2d)
@@ -89,7 +89,7 @@ This is an Angular application developed for managing a dairy farm. The applicat
 ![About Page](https://github.com/user-attachments/assets/2a3efd53-2d4a-4d89-9131-973d5918a884)
 
 ### Logout Page
-![Logout Page](https://private-user-images.githubusercontent.com/115477680/353762116-788019b3-4189-4530-b570-d745aee78765.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjI0MTcyMDIsIm5iZiI6MTcyMjQxNjkwMiwicGF0aCI6Ii8xMTU0Nzc2ODAvMzUzNzYyMTE2LTc4ODAxOWIzLTQxODktNDUzMC1iNTcwLWQ3NDVhZWU3ODc2NS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwNzMxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDczMVQwOTA4MjJaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mZGEwZmFmODQwNThkMTEzZTZlZTFlMzZkZjFhMWE5YTE1NThjNmI1NThlZmIyMTVlNWE0MzViNDE2ODIzZDcwJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.8mhv_Jbg_-UroRNw47u5FSbfAWK9fbrfgboZgoYZhq8)
+![Logout Page](https://github.com/user-attachments/assets/788019b3-4189-4530-b570-d745aee78765)
 
 ## User Authentication
 
